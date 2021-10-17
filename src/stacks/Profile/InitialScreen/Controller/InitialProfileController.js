@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacityBase,
+  TouchableOpacity,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const InitialProfileController = ({ navigation }) => {
@@ -7,19 +12,24 @@ const InitialProfileController = ({ navigation }) => {
   const [keyValuePairArray, setKeyValuePairArray] = useState([]);
   const [textArray, setTextArray] = useState([]);
 
-  useEffect(() => {
-    const getKeys = async () => {
-      try {
-        const keys = await AsyncStorage.getAllKeys();
-        console.log("Chaves", keys);
-        const keyVal = await AsyncStorage.multiGet(keys);
-        console.log("Keyval", keyVal);
-        setKeyValuePairArray(keyVal);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const getKeyVal = async () => {
+    const keys = await AsyncStorage.getAllKeys();
+    // console.log("Chaves", keys);
+    const keyVal = await AsyncStorage.multiGet(keys);
 
+    return keyVal;
+  };
+  const getKeys = async () => {
+    try {
+      const keyVal = await getKeyVal();
+      // console.log("Keyval", keyVal);
+      console.log("get keys rodou");
+      setKeyValuePairArray(keyVal);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
     getKeys();
   }, []);
 
@@ -55,8 +65,20 @@ const InitialProfileController = ({ navigation }) => {
       }}
     >
       {textArray.map((key) => (
-        <Text key={key}>{key}</Text>
+        <Text style={{ flex: 1 }} key={key}>
+          {key}
+        </Text>
       ))}
+
+      <TouchableOpacity
+        onPress={() => getKeys()}
+        style={{
+          height: "50%",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ color: "blue" }}>Refresh</Text>
+      </TouchableOpacity>
     </View>
   );
 };
