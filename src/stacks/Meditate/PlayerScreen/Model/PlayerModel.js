@@ -8,7 +8,7 @@ export default class PlayerModel {
         this.sound_required = require("../../../../assets/sounds/Walking.mp3");
         break;
       case "Still":
-        this.sound_required = require("../../../../assets/sounds/Still.wav");
+        this.sound_required = require("../../../../assets/sounds/Still.mp3");
         break;
       case "Running":
         this.sound_required = require("../../../../assets/sounds/Running.mp3");
