@@ -97,7 +97,7 @@ const PlayerController = ({ navigation, route }) => {
 
     let times_meditated = await AsyncStorage.getItem(var_name_times);
     if (times_meditated == null) {
-      times_meditated = "0";
+      times_meditated = "1";
     } else {
       times_meditated = parseInt(times_meditated) + 1;
       times_meditated = times_meditated.toString();
@@ -106,7 +106,7 @@ const PlayerController = ({ navigation, route }) => {
 
     let time_meditated = await AsyncStorage.getItem(var_name_time);
     if (time_meditated == null) {
-      time_meditated = "0";
+      time_meditated = "1";
     } else {
       time_meditated = parseInt(time_meditated) + route.params.time;
       time_meditated = time_meditated.toString();
