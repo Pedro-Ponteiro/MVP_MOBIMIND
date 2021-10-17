@@ -52,20 +52,20 @@ const PlayerController = ({ navigation, route }) => {
     }
   };
 
-  const _onPlaybackStatusUpdate = (auxstatus) => {
+  const _onPlaybackStatusUpdate = async (auxstatus) => {
     if (auxstatus.didJustFinish) {
       if (playerModel.current_loop == playerModel.number_repeats) {
         clearInterval(interval.current);
-        playbackObj.current.unloadAsync();
+        await playbackObj.current.unloadAsync();
 
         // saving data to local storage
-        saveData();
+        await saveData();
 
         navigation.navigate("InitialMeditateScreen");
         return;
       } else {
         playerModel.current_loop += 1;
-        playbackObj.current.replayAsync();
+        await playbackObj.current.replayAsync();
       }
       return;
     }
@@ -102,15 +102,17 @@ const PlayerController = ({ navigation, route }) => {
       times_meditated = parseInt(times_meditated) + 1;
       times_meditated = times_meditated.toString();
     }
+    console.log(`Setando ${var_name_times} como ${times_meditated}`);
     await AsyncStorage.setItem(var_name_times, times_meditated);
 
     let time_meditated = await AsyncStorage.getItem(var_name_time);
     if (time_meditated == null) {
-      time_meditated = "1";
+      time_meditated = route.params.time.toString();
     } else {
       time_meditated = parseInt(time_meditated) + route.params.time;
       time_meditated = time_meditated.toString();
     }
+    console.log(`Setando ${var_name_time} como ${time_meditated}`);
     await AsyncStorage.setItem(var_name_time, time_meditated);
   };
 
