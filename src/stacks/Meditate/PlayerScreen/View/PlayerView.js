@@ -5,8 +5,9 @@ import styles from "./PlayerStyle";
 const PlayerView = (props) => {
   return (
     <View style={styles.container}>
-      <Text>{props.tipo_meditacao}</Text>
-      <Text>{props.tempo_meditacao} minutes</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 26 }}>
+        {props.tempo_meditacao} minutes {props.tipo_meditacao}
+      </Text>
       <TouchableOpacity
         style={styles.btnPause}
         onPress={() => {

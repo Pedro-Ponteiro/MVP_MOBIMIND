@@ -2,31 +2,32 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   containerExternal: {
-    flexDirection: "column",
     flex: 1,
-    justifyContent: "flex-start",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
   },
+  containerBlock: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+
   textQuestion: {
-    fontSize: 22,
+    color: "blue",
+    textAlign: "left",
   },
   radioContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-  },
-  textQuestionPor: {
     flex: 1,
   },
 
-  containerBlock: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-  },
   btnIniciarMeditacao: {
+    flex: 1,
     aspectRatio: 1,
-    width: "35%",
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
@@ -34,9 +35,12 @@ export default StyleSheet.create({
     backgroundColor: "orange",
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 50,
   },
   btnText: {
     textAlign: "center",
+    flex: 1,
+    textAlignVertical: "center",
+    fontWeight: "bold",
   },
 });

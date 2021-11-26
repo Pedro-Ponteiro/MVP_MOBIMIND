@@ -18,8 +18,6 @@ export default StyleSheet.create({
   },
 
   btnCancel: {
-    color: "#550000",
-    borderWidth: 1,
-    borderColor: "#550000",
+    color: "blue",
   },
 });

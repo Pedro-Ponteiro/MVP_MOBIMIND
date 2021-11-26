@@ -7,6 +7,7 @@ import CustomizationController from "../stacks/Meditate/CustomizationScreen/Cont
 import PlayerController from "../stacks/Meditate/PlayerScreen/Controller/PlayerController";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
+import LogoComponent from "../components/LogoComponent";
 
 const Tab = createBottomTabNavigator();
 const MeditateStack = createNativeStackNavigator();
@@ -15,7 +16,10 @@ const ProfileStack = createNativeStackNavigator();
 function MeditateStackNav() {
   return (
     <MeditateStack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerLeft: () => <LogoComponent />,
+        title: null,
+      }}
       initialRouteName="InitialMeditateScreen"
     >
       <MeditateStack.Screen
@@ -34,7 +38,7 @@ function MeditateStackNav() {
 function ProfileStackNav() {
   return (
     <ProfileStack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerLeft: () => <LogoComponent />, title: null }}
       initialRouteName="InitialProfileScreen"
     >
       <ProfileStack.Screen
