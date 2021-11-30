@@ -142,6 +142,8 @@ const PlayerController = ({ navigation, route }) => {
 
       console.log("AQUI");
 
+      // TODO: usar o pacote ASssets pra gerar uma pasta comum com os arquivos de audio
+      // e ler/apoagar de lá
       let gambs = new PlayerModel({ activity: route.params.activity });
 
       const uri = Asset.fromModule(gambs.sound_required).uri;
