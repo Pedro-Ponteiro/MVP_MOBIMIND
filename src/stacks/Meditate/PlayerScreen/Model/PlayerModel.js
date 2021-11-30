@@ -3,7 +3,7 @@ export default class PlayerModel {
     const number_repeats = route_params.time / 5;
     this.number_repeats = number_repeats;
 
-    switch (route_params.check) {
+    switch (route_params.activity) {
       case "Walking":
         this.sound_required = require("../../../../assets/sounds/Walking.mp3");
         break;

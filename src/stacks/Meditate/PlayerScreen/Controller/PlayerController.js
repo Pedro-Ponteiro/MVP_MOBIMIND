@@ -3,6 +3,9 @@ import PlayerView from "../View/PlayerView";
 import { Audio } from "expo-av";
 import PlayerModel from "../Model/PlayerModel";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import APIController from "../../../../components/APIController";
+import * as FileSystem from "expo-file-system";
+import { Asset } from "expo-asset";
 
 const PlayerController = ({ navigation, route }) => {
   const [count, setCount] = useState(0);
@@ -10,6 +13,13 @@ const PlayerController = ({ navigation, route }) => {
   const sound = React.useRef(null);
   const playbackObj = React.useRef(null);
   const [playPauseText, setplayPauseText] = useState("Play");
+
+  // TODO: PEGAR INFORMAÇÕES DO CUSTOMIZATION (ID DA MEDITAÇÃO E ACTIVITY)
+  // COM O ID, PEGAR O BASE64 PELO CONTROLADOR DE API
+  // COM O BASE64, SALVAR LOCALMENTE O AUDIO (SOBRESCREVER) DE ACORDO COM A ACTIVITY
+  // DE UMA FORMA QUE O PLAYERMODEL O ENCONTRE PELO "REQUIRE"
+  //
+
   const playerModel = new PlayerModel(route.params);
 
   const button_pause_pressed = async () => {
@@ -125,6 +135,33 @@ const PlayerController = ({ navigation, route }) => {
       shouldDuckAndroid: true,
       staysActiveInBackground: true,
     });
+
+    const create_meditation = async () => {
+      const apiCon = new APIController();
+      let base64_audio = await apiCon.post_meditation(route.params.activity);
+
+      console.log("AQUI");
+
+      let gambs = new PlayerModel({ activity: route.params.activity });
+
+      const uri = Asset.fromModule(gambs.sound_required).uri;
+      console.log("uri", uri);
+
+      await FileSystem.deleteAsync(uri);
+
+      await FileSystem.writeAsStringAsync(uri, base64_audio, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+      console.log("AQUI");
+
+      // save audio
+
+      // continue the process
+    };
+    console.log("aNTES DE CAHAMR FUNCAO");
+
+    create_meditation();
+    console.log("DEPOIS DE CAHAMR FUNCAO");
   }, []);
 
   return (
